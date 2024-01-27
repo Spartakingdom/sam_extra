@@ -5,10 +5,12 @@ local sam, command, language = sam, sam.command, sam.language
 if SERVER then
     util.AddNetworkString( "SAMFriendsCheck" )
     hook.Add( "EntityTakeDamage", "DBanCode", function( target, dmginfo )
-        if dmginfo:GetAttacker():sam_get_nwvar("dban", false) == true then
+  
+        pcall(function()
+          if dmginfo:GetAttacker():sam_get_nwvar("dban", false) == true then
             dmginfo:ScaleDamage( 0 )
-        end
-    end )
+          end
+        end)
     local freeze_player = function(ply)
         if SERVER then
             ply:Lock()
